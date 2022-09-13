@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  datasource:
+    url: ${DWBI_DB}
+    driver-class-name: org.postgresql.Driver
+
+  h2:
+    console.enabled: true
