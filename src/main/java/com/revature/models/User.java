@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import com.revature.annotations.AuthRestriction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    @Column(name = "authrestriction")
+    @Enumerated(EnumType.STRING)
+    private AuthRestriction authRestriction;
 }

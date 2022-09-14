@@ -1,9 +1,12 @@
 package com.revature.controllers;
 
+import com.revature.annotations.AuthRestriction;
+import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
 import com.revature.models.User;
 import com.revature.services.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,29 +16,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:4200", "https://green-plant-0ac64be10.1.azurestaticapps.net"}, allowCredentials = "true")
+
 public class AuthController {
 
-    private final AuthService authService;
-
-    public AuthController(AuthService authService) {
-        this.authService = authService;
-    }
+    @Autowired
+    AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
-        Optional<User> optional = authService.findByCredentials(loginRequest.getEmail(), loginRequest.getPassword());
-
-        if(!optional.isPresent()) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        session.setAttribute("user", optional.get());
-
-        return ResponseEntity.ok(optional.get());
+    public Jwt login(@RequestBody LoginRequest loginRequest) {
+        return authService.authenticateUser(loginRequest);
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/logout") // I think this is just a backend "reset auth header value to " ".
     public ResponseEntity<Void> logout(HttpSession session) {
         session.removeAttribute("user");
 
@@ -48,7 +41,8 @@ public class AuthController {
                 registerRequest.getEmail(),
                 registerRequest.getPassword(),
                 registerRequest.getFirstName(),
-                registerRequest.getLastName());
+                registerRequest.getLastName(),
+                AuthRestriction.USER);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
     }
