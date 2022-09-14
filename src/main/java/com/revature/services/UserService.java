@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.dtos.ProfileInfo;
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User save(User user, ProfileInfo profileInfo) {
+
+        User updated = user;
+        updated.setFirstName(profileInfo.getFirstname());
+        updated.setLastName(profileInfo.getLastname());
+        return userRepository.save(updated);
+    }
 
 }

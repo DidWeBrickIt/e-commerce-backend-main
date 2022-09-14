@@ -18,7 +18,7 @@ public class Address {
     private int id;
 
     @Column(name = "userid")
-    private int userId;
+    private int userid;
 
     @Column(name = "address1")
     private String address1;
@@ -46,12 +46,12 @@ public class Address {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getAddress1() {
@@ -106,7 +106,7 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", userId=" + userId +
+                ", userId=" + userid +
                 ", address1='" + address1 + '\'' +
                 ", address2='" + address2 + '\'' +
                 ", city='" + city + '\'' +
