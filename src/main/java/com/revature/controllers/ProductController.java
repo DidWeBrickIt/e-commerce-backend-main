@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.annotations.AuthRestriction;
 import com.revature.annotations.Authorized;
 import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
@@ -13,7 +14,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:4200", "https://green-plant-0ac64be10.1.azurestaticapps.net"}, allowCredentials = "true")
+
 public class ProductController {
 
     private final ProductService productService;
@@ -22,13 +24,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @Authorized
+    @Authorized(authorities = {AuthRestriction.LoggedIn ,AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping
     public ResponseEntity<List<Product>> getInventory() {
         return ResponseEntity.ok(productService.findAll());
     }
 
-    @Authorized
+    @Authorized(authorities = {AuthRestriction.LoggedIn ,AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
@@ -39,13 +41,13 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
-    @Authorized
+    @Authorized(authorities = {AuthRestriction.LoggedIn })
     @PutMapping
     public ResponseEntity<Product> upsert(@RequestBody Product product) {
         return ResponseEntity.ok(productService.save(product));
     }
 
-    @Authorized
+    @Authorized(authorities = {AuthRestriction.LoggedIn ,AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @PatchMapping
     public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) { 	
     	List<Product> productList = new ArrayList<Product>();
@@ -72,7 +74,7 @@ public class ProductController {
         return ResponseEntity.ok(productList);
     }
 
-    @Authorized
+    @Authorized(authorities = {AuthRestriction.LoggedIn })
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
