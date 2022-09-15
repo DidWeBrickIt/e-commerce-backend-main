@@ -2,6 +2,8 @@ package com.revature.controllers;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.revature.annotations.AuthRestriction;
+import com.revature.annotations.Authorized;
 import com.revature.dtos.ProfileInfo;
 import com.revature.exceptions.NotAuthorizedException;
 import com.revature.exceptions.UserNotFoundException;
@@ -27,7 +29,9 @@ public class ProfileController {
     @Autowired
     JwtService jwtService;
 
-    @PutMapping("/profile")
+
+    @Authorized(authorities = {AuthRestriction.LoggedIn , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @PutMapping
     public ResponseEntity<ProfileInfo> update(@RequestHeader("auth") String jwt, @RequestBody ProfileInfo profileInfo){
 
         if(jwtService.validateJWT(jwt)){
@@ -53,7 +57,9 @@ public class ProfileController {
 
     }
 
-    @GetMapping("/profile")
+
+    @Authorized(authorities = {AuthRestriction.LoggedIn , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @GetMapping
     public ResponseEntity<ProfileInfo> retrieve(@RequestHeader("auth") String jwt){
 
         if(jwtService.validateJWT(jwt)){
@@ -65,8 +71,8 @@ public class ProfileController {
             if(foundUser.isPresent()){
 
                 Optional<Address> foundAddress = addressService.findByUserid(foundUser.get().getId());
-                ProfileInfo profileInfo = new ProfileInfo();
 
+                ProfileInfo profileInfo = new ProfileInfo();
                 profileInfo.setFirstname(foundUser.get().getFirstName());
                 profileInfo.setLastname(foundUser.get().getLastName());
 
@@ -78,7 +84,8 @@ public class ProfileController {
                     profileInfo.setCity(foundAddress.get().getCity());
                     profileInfo.setCountry(foundAddress.get().getCountry());
                     profileInfo.setState(foundAddress.get().getState());
-                    profileInfo.setZip((foundAddress.get().getZip()));
+                    profileInfo.setZip(
+                            String.valueOf(foundAddress.get().getZip()) );
 
                     return ResponseEntity.status(HttpStatus.OK).body(profileInfo);
 
