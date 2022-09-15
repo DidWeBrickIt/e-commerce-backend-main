@@ -28,13 +28,6 @@ public class AuthController {
         return authService.authenticateUser(loginRequest);
     }
 
-    @PostMapping("/logout") // I think this is just a backend "reset auth header value to " ".
-    public ResponseEntity<Void> logout(HttpSession session) {
-        session.removeAttribute("user");
-
-        return ResponseEntity.ok().build();
-    }
-
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) {
         User created = new User(0,
