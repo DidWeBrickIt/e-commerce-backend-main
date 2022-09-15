@@ -31,7 +31,7 @@ public class AuthAspect {
         String jwt = request.getHeader("auth");
         if(!jwtService.validateJWT(jwt))
         {
-            throw new RuntimeException("jwt failed validation");
+            throw new NotAuthorizedException("jwt failed validation");
         }
 
         DecodedJWT decodedJWT = JWT.decode(jwt);
