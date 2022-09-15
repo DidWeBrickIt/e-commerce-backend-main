@@ -33,7 +33,8 @@ public class AddressService {
             updated.setAddress2(profileInfo.getAddress2());
             updated.setCity(profileInfo.getCity());
             updated.setState(profileInfo.getState());
-            updated.setZip(profileInfo.getZip());
+            updated.setZip(
+                    Integer.parseInt(profileInfo.getZip()));
             updated.setCountry(profileInfo.getCountry());
 
             return addressRepository.save(updated);
@@ -47,7 +48,8 @@ public class AddressService {
             created.setAddress2(profileInfo.getAddress2());
             created.setCity(profileInfo.getCity());
             created.setState(profileInfo.getState());
-            created.setZip(profileInfo.getZip());
+            created.setZip(
+                    Integer.parseInt(profileInfo.getZip()));
             created.setCountry(profileInfo.getCountry());
 
             return  addressRepository.save(created);

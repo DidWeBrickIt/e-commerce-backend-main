@@ -33,7 +33,7 @@ public class Address {
     private String state;
 
     @Column(name = "zip")
-    private String zip;
+    private int zip;
 
     @Column(name = "country")
     private String country;
@@ -86,11 +86,11 @@ public class Address {
         this.state = state;
     }
 
-    public String getZip() {
+    public int getZip() {
         return zip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(int zip) {
         this.zip = zip;
     }
 
