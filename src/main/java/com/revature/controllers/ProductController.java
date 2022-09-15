@@ -24,13 +24,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn ,AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping
     public ResponseEntity<List<Product>> getInventory() {
         return ResponseEntity.ok(productService.findAll());
     }
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn ,AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
@@ -41,13 +41,13 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn })
+    @Authorized(authorities = {AuthRestriction.ADMIN })
     @PutMapping
     public ResponseEntity<Product> upsert(@RequestBody Product product) {
         return ResponseEntity.ok(productService.save(product));
     }
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn ,AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @Authorized(authorities = {AuthRestriction.LoggedIn , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @PatchMapping
     public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) { 	
     	List<Product> productList = new ArrayList<Product>();
@@ -74,7 +74,7 @@ public class ProductController {
         return ResponseEntity.ok(productList);
     }
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn })
+    @Authorized(authorities = {AuthRestriction.ADMIN })
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
