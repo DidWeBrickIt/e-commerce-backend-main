@@ -33,7 +33,7 @@ public class JwtService
             return true;
         } catch (Exception e)
         {
-            throw new RuntimeException("Failed to verify Jwt: " + jwt);
+            return false;
         }
     }
 
