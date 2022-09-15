@@ -22,7 +22,7 @@ public class JwtServiceTests {
 
     @Test
     public void validate_invalid_jwt_test() {
-        Assertions.assertThrows(RuntimeException.class, () -> this.jwtService.validateJWT("aaadlanfsdnvoisdn"));
+        Assertions.assertFalse(this.jwtService.validateJWT("aaadlanfsdnvoisdn"));
     }
 
 }
