@@ -34,6 +34,7 @@ public class ProfileController {
     @PatchMapping
     public ResponseEntity<ProfileInfo> update(@RequestHeader("auth") String jwt, @RequestBody ProfileInfo profileInfo){
 
+        System.out.println("Inside Profile Controller");
         if(jwtService.validateJWT(jwt)){
 
             DecodedJWT decodedJWT = JWT.decode(jwt);

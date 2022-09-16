@@ -21,8 +21,12 @@ public class ProfileService {
 
     public ProfileInfo save(int id, ProfileInfo profileInfo){
 
+        System.out.println("Inside Profile Service");
+        System.out.println(profileInfo);
+
         Optional<User> originalUser = this.userService.findById(id);
         if(originalUser.isPresent()){
+            System.out.println("Inside Profile Service Update User");
             User updatedUser = originalUser.get();
             updatedUser.setFirstName(profileInfo.getUser().getFirstName());
             updatedUser.setLastName(profileInfo.getUser().getLastName());
@@ -31,20 +35,33 @@ public class ProfileService {
 
         Optional<Address> originalAddress = this.addressService.findByUserid(id);
         if(originalAddress.isPresent()){
+            System.out.println("Inside Profile Service Update Address");
             Address updatedAddress = profileInfo.getAddress();
             updatedAddress.setId(originalAddress.get().getId());
             updatedAddress.setUserid(id);
             this.addressService.save(updatedAddress);
+        }else{
+            System.out.println("Inside Profile Service Create Address");
+            Address newAddress = profileInfo.getAddress();
+            newAddress.setUserid(id);
+            this.addressService.save(newAddress);
         }
 
         Optional<Payment> originalPayment = this.paymentService.findByUserid(id);
         if(originalPayment.isPresent()){
+            System.out.println("Inside Profile Service Update Payment");
             Payment updatedPayment = profileInfo.getPayment();
             updatedPayment.setId(originalPayment.get().getId());
             updatedPayment.setUserid(id);
             this.paymentService.save(updatedPayment);
+        }else{
+            System.out.println("Inside Profile Service Create Payment");
+            Payment newPayment = profileInfo.getPayment();
+            newPayment.setUserid(id);
+            System.out.println(profileInfo.getPayment());
+            System.out.println(newPayment);
+            this.paymentService.save(newPayment);
         }
-
 
         return profileInfo;
     }
