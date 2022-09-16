@@ -23,7 +23,7 @@ import java.util.Optional;
 public class ProfileController {
 
     @Autowired
-    AddressService addressService;
+    ProfileService profileService;
     @Autowired
     UserService userService;
     @Autowired
@@ -31,7 +31,7 @@ public class ProfileController {
 
 
     @Authorized(authorities = {AuthRestriction.LoggedIn, AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
-    @PutMapping
+    @PatchMapping
     public ResponseEntity<ProfileInfo> update(@RequestHeader("auth") String jwt, @RequestBody ProfileInfo profileInfo){
 
         if(jwtService.validateJWT(jwt)){
@@ -42,19 +42,11 @@ public class ProfileController {
 
             if(foundUser.isPresent()){
 
-                Address updatedAddress = addressService.save(foundUser.get().getId(), profileInfo);
-                User updatedUser = userService.save(foundUser.get(), profileInfo);
+                ProfileInfo updated = this.profileService.save(foundUser.get().getId(), profileInfo);
+                return ResponseEntity.status(HttpStatus.CREATED).body(updated);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(profileInfo);
-
-            }else{
-                throw new UserNotFoundException();
-            }
-
-        }else{
-            throw new NotAuthorizedException();
-        }
-
+            }else{throw new UserNotFoundException();}
+        }else{throw new NotAuthorizedException();}
     }
 
 
@@ -70,28 +62,8 @@ public class ProfileController {
 
             if(foundUser.isPresent()){
 
-                Optional<Address> foundAddress = addressService.findByUserid(foundUser.get().getId());
-
-                ProfileInfo profileInfo = new ProfileInfo();
-                profileInfo.setFirstname(foundUser.get().getFirstName());
-                profileInfo.setLastname(foundUser.get().getLastName());
-
-
-                if(foundAddress.isPresent()){
-
-                    profileInfo.setAddress1(foundAddress.get().getAddress1());
-                    profileInfo.setAddress2(foundAddress.get().getAddress2());
-                    profileInfo.setCity(foundAddress.get().getCity());
-                    profileInfo.setCountry(foundAddress.get().getCountry());
-                    profileInfo.setState(foundAddress.get().getState());
-                    profileInfo.setZip(
-                            String.valueOf(foundAddress.get().getZip()) );
-
-                    return ResponseEntity.status(HttpStatus.OK).body(profileInfo);
-
-                }
-
-                return ResponseEntity.status(HttpStatus.OK).body(profileInfo);
+                ProfileInfo retrieved = this.profileService.get(foundUser.get().getId());
+                return ResponseEntity.status(HttpStatus.OK).body(retrieved);
 
             }else{throw new UserNotFoundException();}
 

@@ -19,13 +19,13 @@ public class Payment {
     private int id;
 
     @Column(name="userid")
-    private int userId;
+    private int userid;
 
     @Column(name="credit_card_number")
-    private String creditCardNumber;
+    private String credit_card_number;
 
     @Column(name="security_code")
-    private String securityCode;
+    private String security_code;
 
     @Column(name="expiration")
     private String expiration;
@@ -39,28 +39,28 @@ public class Payment {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
-    public String getCreditCardNumber() {
-        return creditCardNumber;
+    public String getCredit_card_number() {
+        return credit_card_number;
     }
 
-    public void setCreditCardNumber(String creditCardNumber) {
-        this.creditCardNumber = creditCardNumber;
+    public void setCredit_card_number(String credit_card_number) {
+        this.credit_card_number = credit_card_number;
     }
 
-    public String getSecurityCode() {
-        return securityCode;
+    public String getSecurity_code() {
+        return security_code;
     }
 
-    public void setSecurityCode(String securityCode) {
-        this.securityCode = securityCode;
+    public void setSecurity_code(String security_code) {
+        this.security_code = security_code;
     }
 
     public String getExpiration() {
@@ -75,9 +75,9 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", creditCardNumber='" + creditCardNumber + '\'' +
-                ", securityCode='" + securityCode + '\'' +
+                ", userId=" + userid +
+                ", creditCardNumber='" + credit_card_number + '\'' +
+                ", securityCode='" + security_code + '\'' +
                 ", expDate='" + expiration + '\'' +
                 '}';
     }
