@@ -30,7 +30,7 @@ public class ProfileController {
     JwtService jwtService;
 
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @Authorized(authorities = {AuthRestriction.LoggedIn, AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @PutMapping
     public ResponseEntity<ProfileInfo> update(@RequestHeader("auth") String jwt, @RequestBody ProfileInfo profileInfo){
 
@@ -58,7 +58,7 @@ public class ProfileController {
     }
 
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @Authorized(authorities = {AuthRestriction.LoggedIn, AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping
     public ResponseEntity<ProfileInfo> retrieve(@RequestHeader("auth") String jwt){
 
