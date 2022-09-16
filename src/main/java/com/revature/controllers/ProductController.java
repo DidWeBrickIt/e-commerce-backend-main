@@ -26,13 +26,13 @@ public class ProductController {
 
     @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping
-    public ResponseEntity<List<Product>> getInventory() {
+    public ResponseEntity<List<Product>> getInventory(@RequestHeader("auth") String jwt) {
         return ResponseEntity.ok(productService.findAll());
     }
 
     @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
+    public ResponseEntity<Product> getProductById(@RequestHeader("auth") String jwt, @PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
 
         if(!optional.isPresent()) {
@@ -43,13 +43,13 @@ public class ProductController {
 
     @Authorized(authorities = {AuthRestriction.ADMIN })
     @PutMapping
-    public ResponseEntity<Product> upsert(@RequestBody Product product) {
+    public ResponseEntity<Product> upsert(@RequestHeader("auth") String jwt, @RequestBody Product product) {
         return ResponseEntity.ok(productService.save(product));
     }
 
     @Authorized(authorities = {AuthRestriction.LoggedIn , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @PatchMapping
-    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) { 	
+    public ResponseEntity<List<Product>> purchase(@RequestHeader("auth") String jwt, @RequestBody List<ProductInfo> metadata) {
     	List<Product> productList = new ArrayList<Product>();
     	
     	for (int i = 0; i < metadata.size(); i++) {
@@ -76,7 +76,7 @@ public class ProductController {
 
     @Authorized(authorities = {AuthRestriction.ADMIN })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
+    public ResponseEntity<Product> deleteProduct(@RequestHeader("auth") String jwt, @PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
 
         if(!optional.isPresent()) {
