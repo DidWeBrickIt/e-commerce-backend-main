@@ -19,25 +19,16 @@ public class UserService {
     public Optional<User> findByCredentials(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
     }
-
+    
     public Optional<User> findUserById(int id) {return this.userRepository.findById(id);}
 
     public Optional<User> findByUsername(String email) {
         return this.userRepository.findByEmail(email);
     }
-
-
+    public Optional<User> findById(int id){ return this.userRepository.findById(id);}
     public User save(User user) {
-    //    user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
-    public User save(User user, ProfileInfo profileInfo) {
-
-        User updated = user;
-        updated.setFirstName(profileInfo.getFirstname());
-        updated.setLastName(profileInfo.getLastname());
-        return userRepository.save(updated);
-    }
 
 }
