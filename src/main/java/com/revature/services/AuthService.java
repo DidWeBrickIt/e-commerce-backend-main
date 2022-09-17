@@ -3,6 +3,7 @@ package com.revature.services;
 import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.exceptions.PasswordMismatchException;
+import com.revature.exceptions.UserExistsException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.User;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +51,13 @@ public class AuthService {
     }
 
 
-    public User register(User user) {
+    public User register(User user)
+    {
+       if (this.userService.findByUsername(user.getEmail()).isPresent())
+       {
+           // user already exists
+           throw new UserExistsException();
+       }
         return userService.save(user);
     }
 }

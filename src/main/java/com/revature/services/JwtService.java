@@ -20,7 +20,7 @@ public class JwtService
                 .withClaim("username", username)
                 .withClaim("authority", role.name())
                 .sign(algorithm);
-        return new Jwt(jwt, AuthRestriction.LoggedIn.name());
+        return new Jwt(jwt, role.name());
     }
 
     public boolean validateJWT(String jwt)
