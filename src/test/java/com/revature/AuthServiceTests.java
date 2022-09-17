@@ -3,6 +3,7 @@ package com.revature;
 import com.revature.annotations.AuthRestriction;
 import com.revature.dtos.LoginRequest;
 import com.revature.exceptions.PasswordMismatchException;
+import com.revature.exceptions.UserExistsException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.User;
 import com.revature.services.AuthService;
@@ -42,5 +43,20 @@ public class AuthServiceTests {
         LoginRequest loginRequest = new LoginRequest("test@test", "test");
         Assertions.assertNotNull(this.authService.authenticateUser(loginRequest));
     }
+
+    @Test
+    void find_by_credentials_test()
+    {
+      int id = authService.register(new User(0, "test@test", "test", "test", "test", AuthRestriction.USER)).getId();
+      Assertions.assertEquals(id, authService.findByCredentials("test@test", "test").get().getId());
+    }
+
+    @Test
+    void throw_user_already_exist_test()
+    {
+        authService.register(new User(0, "test@test", "test", "test", "test", AuthRestriction.USER));
+        Assertions.assertThrows(UserExistsException.class, () ->authService.register(new User(0, "test@test", "test", "duplicate", "user", AuthRestriction.USER)));
+    }
+
 
 }
