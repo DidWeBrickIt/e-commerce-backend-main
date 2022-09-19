@@ -47,7 +47,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.save(product));
     }
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @Authorized(authorities = {AuthRestriction.USER , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @PatchMapping
     public ResponseEntity<List<Product>> purchase(@RequestHeader("auth") String jwt, @RequestBody List<ProductInfo> metadata) {
     	List<Product> productList = new ArrayList<Product>();

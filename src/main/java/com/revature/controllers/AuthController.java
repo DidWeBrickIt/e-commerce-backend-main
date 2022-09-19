@@ -1,11 +1,15 @@
 package com.revature.controllers;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.revature.annotations.AuthRestriction;
+import com.revature.annotations.Authorized;
 import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
 import com.revature.models.User;
 import com.revature.services.AuthService;
+import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +27,9 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping("/login")
     public Jwt login(@RequestBody LoginRequest loginRequest) {
         return authService.authenticateUser(loginRequest);
@@ -38,5 +45,13 @@ public class AuthController {
                 AuthRestriction.USER);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
+    }
+
+    @Authorized(authorities = {AuthRestriction.USER})
+    @GetMapping
+    public ResponseEntity<Integer> getUserIdByJwt(@RequestHeader("auth") String jwt){
+        DecodedJWT decodedJWT = JWT.decode(jwt);
+        String email = decodedJWT.getClaim("username").asString();
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findByUsername(email).get().getId());
     }
 }
