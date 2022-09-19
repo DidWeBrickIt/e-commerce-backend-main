@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.dtos.ReadableReview;
+import com.revature.exceptions.InvalidInputException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Review;
 import com.revature.models.User;
@@ -44,6 +45,14 @@ public class ReviewService {
     }
 
     public Review registerReview(Review review) {
+        if (review.getDescription().equals(""))
+        {
+            throw new InvalidInputException("Review can't have null description");
+        }
+        if (review.getRating() >5 || review.getRating() < 1)
+        {
+            throw new InvalidInputException("rating must be between 1 and 5 inclusive. Given rating: " + review.getRating());
+        }
         return this.reviewRepository.save(review);
     }
 
