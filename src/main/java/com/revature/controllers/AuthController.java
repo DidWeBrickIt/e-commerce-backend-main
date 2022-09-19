@@ -1,11 +1,13 @@
 package com.revature.controllers;
 
 import com.revature.annotations.AuthRestriction;
+import com.revature.dtos.CredentialChange;
 import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
 import com.revature.models.User;
 import com.revature.services.AuthService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,4 +41,11 @@ public class AuthController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
     }
+
+    @PatchMapping("/change")
+    public ResponseEntity<User> changeCredential(@RequestBody CredentialChange credentialChange){
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.update(credentialChange));
+    }
+
+
 }
