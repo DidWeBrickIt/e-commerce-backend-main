@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.revature.annotations.AuthRestriction;
 import com.revature.annotations.Authorized;
-//import com.revature.dtos.CredentialChange;
+import com.revature.dtos.CredentialChange;
 import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
