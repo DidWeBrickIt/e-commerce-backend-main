@@ -48,4 +48,12 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
     }
 
+    @ExceptionHandler(InvalidInputException.class)
+    public ResponseEntity<Object> handInvalidInputException(HttpServletRequest request, InvalidInputException invalidInputException)
+    {
+        String errorMessage = "Invalid Input given for request";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+    }
+
+
 }
