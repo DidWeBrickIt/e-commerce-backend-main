@@ -39,7 +39,6 @@ public class AuthService {
         }
 
         User user = possibleUser.get();
-        log.info("sent password: " + credentials.getPassword() + ". User's password: " + user.getPassword());
 
         if (!user.getPassword().equals(credentials.getPassword()))
         {
