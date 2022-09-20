@@ -29,7 +29,7 @@ public class ReviewService {
         List<ReadableReview> readableReviews = new ArrayList<>();
         for (Review review : reviews) {
             ReadableReview temp = new ReadableReview();
-            Optional<User> possibleUser = this.userService.findUserById(review.getUserId());
+            Optional<User> possibleUser = this.userService.findById(review.getUserId());
 
             if (!possibleUser.isPresent()) {
                 throw new UserNotFoundException(); // as a foreign key. User should ALWAYS be present if a review is referencing that id
