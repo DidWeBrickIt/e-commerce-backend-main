@@ -21,6 +21,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    private String imageUrl;
     @Column(name = "authrestriction")
     @Enumerated(EnumType.STRING)
     private AuthRestriction authRestriction;

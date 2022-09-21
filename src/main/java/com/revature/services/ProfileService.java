@@ -30,6 +30,7 @@ public class ProfileService {
             User updatedUser = originalUser.get();
             updatedUser.setFirstName(profileInfo.getUser().getFirstName());
             updatedUser.setLastName(profileInfo.getUser().getLastName());
+            updatedUser.setImageUrl(profileInfo.getUser().getImageUrl());
             this.userService.save(updatedUser);
         }
 
