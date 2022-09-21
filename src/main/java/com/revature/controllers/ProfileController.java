@@ -53,24 +53,26 @@ public class ProfileController {
 
     @Authorized(authorities = {AuthRestriction.LoggedIn, AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping
-    public ResponseEntity<ProfileInfo> retrieve(@RequestHeader("auth") String jwt){
+    public ResponseEntity<ProfileInfo> retrieve(@RequestHeader("auth") String jwt) {
 
-        if(jwtService.validateJWT(jwt)){
+        if (jwtService.validateJWT(jwt)) {
 
             DecodedJWT decodedJWT = JWT.decode(jwt);
             String username = decodedJWT.getClaim("username").asString();
             Optional<User> foundUser = userService.findByUsername(username);
 
-            if(foundUser.isPresent()){
+            if (foundUser.isPresent()) {
 
                 ProfileInfo retrieved = this.profileService.get(foundUser.get().getId());
                 return ResponseEntity.status(HttpStatus.OK).body(retrieved);
 
-            }else{throw new UserNotFoundException();}
+            } else {
+                throw new UserNotFoundException();
+            }
 
-        }else{throw new NotAuthorizedException();}
-
+        } else {
+            throw new NotAuthorizedException();
+        }
     }
-
 
 }

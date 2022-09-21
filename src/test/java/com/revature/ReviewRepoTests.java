@@ -30,7 +30,7 @@ public class ReviewRepoTests {
     @Test
     void abstract_find_all_with_prod_id_test() {
 
-        int userId = userRepository.save(new User(0, "notnull@gmail.com", "notNull", "first", "last", AuthRestriction.USER)).getId();
+        int userId = userRepository.save(new User(0, "notnull@gmail.com", "notNull", "first", "last", "", AuthRestriction.USER)).getId();
 
         int pId1 = productRepository.save(new Product(0, 1, 1, "description", "imageUrl", "Test Product 1")).getId();
         int pId2 = productRepository.save(new Product(0, 1, 1, "description", "imageUrl", "Test Product 1")).getId();
@@ -49,7 +49,7 @@ public class ReviewRepoTests {
     @Test
     void abstract_find_all_with_prod_sort_test()
     {
-        int userId = userRepository.save(new User(0, "notnull@gmail.com", "notNull", "first", "last", AuthRestriction.USER)).getId();
+        int userId = userRepository.save(new User(0, "notnull@gmail.com", "notNull", "first", "last","", AuthRestriction.USER)).getId();
 
         int pId1 = productRepository.save(new Product(0, 1, 1, "description", "imageUrl", "Test Product 1")).getId();
 

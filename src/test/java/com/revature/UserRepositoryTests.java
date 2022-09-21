@@ -20,14 +20,14 @@ public class UserRepositoryTests {
 
     @Test
     public void save_user_test() {
-        User user = new User(0, "test@test", "test", "Jim", "Henson", AuthRestriction.USER);
+        User user = new User(0, "test@test", "test", "Jim", "Henson","", AuthRestriction.USER);
         User savedUser = this.userRepository.save(user);
         Assertions.assertNotEquals(0, savedUser.getId());
     }
 
     @Test
     public void find_user_by_credentials_test() {
-        User user = new User(0, "test@test", "test", "Jim", "Henson", AuthRestriction.USER);
+        User user = new User(0, "test@test", "test", "Jim", "Henson","", AuthRestriction.USER);
         this.userRepository.save(user);
         Optional<User> foundUser = this.userRepository.findByEmailAndPassword("test@test", "test");
         Assertions.assertEquals(user.getEmail(), foundUser.get().getEmail());
@@ -41,7 +41,7 @@ public class UserRepositoryTests {
 
     @Test
     public void find_user_by_email_test() {
-        User user = new User(0, "test@test", "test", "Jim", "Henson", AuthRestriction.USER);
+        User user = new User(0, "test@test", "test", "Jim", "Henson","", AuthRestriction.USER);
         this.userRepository.save(user);
         Optional<User> foundUser = this.userRepository.findByEmail("test@test");
         Assertions.assertEquals(user.getEmail(), foundUser.get().getEmail());

@@ -36,7 +36,7 @@ public class OrderServiceTests {
 
     @Test
     void create_order(){
-        User user = new User(0, "testuser10@gmail.com", "password", "first", "last", AuthRestriction.USER);
+        User user = new User(0, "testuser10@gmail.com", "password", "first", "last", "", AuthRestriction.USER);
         this.userRepository.save(user);
         Product product = new Product(0, 5, 10.42, "A new toy", "Image of cool toy", "Super Toy");
         Product product2 = new Product(0, 3, 20.00, "A new toy", "Image of cool toy", "Super Toy");
@@ -55,7 +55,7 @@ public class OrderServiceTests {
 
     @Test
     void find_orders_by_user_id(){
-        User user = new User(0, "testuser21@gmail.com", "password", "first", "last", AuthRestriction.USER);
+        User user = new User(0, "testuser21@gmail.com", "password", "first", "last", "", AuthRestriction.USER);
         this.userRepository.save(user);
         Product product = new Product(0, 5, 10.42, "A new toy", "Image of cool toy", "Super Toy");
         Product product2 = new Product(0, 3, 20.00, "A new toy", "Image of cool toy", "Super Toy");

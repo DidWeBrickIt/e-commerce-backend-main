@@ -22,7 +22,7 @@ public class AuthServiceTests {
 
     @Test
     public void authenticate_user_user_does_not_exist_test() {
-        User user = new User(0, "test@test", "test", "test", "testson", AuthRestriction.USER);
+        User user = new User(0, "test@test", "test", "test", "testson","", AuthRestriction.USER);
         this.authService.register(user);
         LoginRequest loginRequest = new LoginRequest("tee@tee", "test");
         Assertions.assertThrows(UserNotFoundException.class, () -> this.authService.authenticateUser(loginRequest));
@@ -30,7 +30,7 @@ public class AuthServiceTests {
 
     @Test
     public void authenticate_user_password_mismatch_test() {
-        User user = new User(0, "test@test", "test", "test", "testson", AuthRestriction.USER);
+        User user = new User(0, "test@test", "test", "test", "testson","", AuthRestriction.USER);
         this.authService.register(user);
         LoginRequest loginRequest = new LoginRequest("test@test", "tee");
         Assertions.assertThrows(PasswordMismatchException.class, () -> this.authService.authenticateUser(loginRequest));
@@ -38,7 +38,7 @@ public class AuthServiceTests {
 
     @Test
     public void authenticate_user_test() {
-        User user = new User(0, "test@test", "test", "test", "testson", AuthRestriction.USER);
+        User user = new User(0, "test@test", "test", "test", "testson","", AuthRestriction.USER);
         this.authService.register(user);
         LoginRequest loginRequest = new LoginRequest("test@test", "test");
         Assertions.assertNotNull(this.authService.authenticateUser(loginRequest));
@@ -47,15 +47,15 @@ public class AuthServiceTests {
     @Test
     void find_by_credentials_test()
     {
-      int id = authService.register(new User(0, "test@test", "test", "test", "test", AuthRestriction.USER)).getId();
+      int id = authService.register(new User(0, "test@test", "test", "test", "test","", AuthRestriction.USER)).getId();
       Assertions.assertEquals(id, authService.findByCredentials("test@test", "test").get().getId());
     }
 
     @Test
     void throw_user_already_exist_test()
     {
-        authService.register(new User(0, "test@test", "test", "test", "test", AuthRestriction.USER));
-        Assertions.assertThrows(UserExistsException.class, () ->authService.register(new User(0, "test@test", "test", "duplicate", "user", AuthRestriction.USER)));
+        authService.register(new User(0, "test@test", "test", "test", "test","", AuthRestriction.USER));
+        Assertions.assertThrows(UserExistsException.class, () ->authService.register(new User(0, "test@test", "test", "duplicate", "user","", AuthRestriction.USER)));
     }
 
 
