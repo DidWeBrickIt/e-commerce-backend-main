@@ -40,7 +40,9 @@ public class AuthController {
                 registerRequest.getPassword(),
                 registerRequest.getFirstName(),
                 registerRequest.getLastName(),
-                AuthRestriction.USER);
+                registerRequest.getImageUrl(),
+                AuthRestriction.USER
+                );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
     }
