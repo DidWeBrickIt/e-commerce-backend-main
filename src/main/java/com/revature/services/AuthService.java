@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import com.revature.dtos.CredentialChange;
+import com.revature.dtos.PasswordChange;
 import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.exceptions.PasswordMismatchException;
@@ -61,17 +61,11 @@ public class AuthService {
         return userService.save(user);
     }
 
-    public User update(CredentialChange credentialChange){
+    public User update(PasswordChange passwordChange){
 
-        Optional<User> updated = userService.findByUsername(credentialChange.getUsername());
-
-        if(!credentialChange.getNewPass().isEmpty()){
-            updated.get().setPassword(credentialChange.getNewPass());
-        }
-        if(!credentialChange.getNewEmail().isEmpty()){
-            updated.get().setEmail(credentialChange.getNewEmail());
-        }
-
+        Optional<User> updated = userService.findByUsername(passwordChange.getUsername());
+        updated.get().setPassword(passwordChange.getNewPass());
         return userService.save(updated.get());
+
     }
 }
