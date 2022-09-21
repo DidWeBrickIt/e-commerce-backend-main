@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.revature.annotations.AuthRestriction;
 import com.revature.annotations.Authorized;
-import com.revature.dtos.CredentialChange;
+import com.revature.dtos.PasswordChange;
 import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -45,12 +47,16 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
     }
 
-    @PatchMapping("/change")
-    public ResponseEntity<User> changeCredential(@RequestBody CredentialChange credentialChange){
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.update(credentialChange));
+    @PatchMapping("/reset")
+    public ResponseEntity<User> changeCredential(@RequestBody PasswordChange passwordChange){
+        Optional<User> retrieved = userService.findByUsername(passwordChange.getUsername());
+
+        if(retrieved.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(authService.update(passwordChange));
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
-
-
 
     @Authorized(authorities = {AuthRestriction.USER})
     @GetMapping
