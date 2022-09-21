@@ -33,7 +33,7 @@ public class ReviewServiceTests
     @Test
     void register_review_test()
     {
-        int userId = userRepository.save(new User(0, "notnull@gmail", "notnull", "first", "last", AuthRestriction.USER)).getId();
+        int userId = userRepository.save(new User(0, "notnull@gmail", "notnull", "first", "last", "", AuthRestriction.USER)).getId();
 
         int pId1 = productRepository.save(new Product(0, 1, 1, "description", "imageUrl", "Test Product 1")).getId();
 
@@ -46,7 +46,7 @@ public class ReviewServiceTests
     @Test
     void get_reviews_for_product_test()
     {
-        int userId = userRepository.save(new User(0, "notnull@gmail", "notnull", "first", "last", AuthRestriction.USER)).getId();
+        int userId = userRepository.save(new User(0, "notnull@gmail", "notnull", "first", "last","", AuthRestriction.USER)).getId();
 
         int pId1 = productRepository.save(new Product(0, 1, 1, "description", "imageUrl", "Test Product 1")).getId();
         int pId2 = productRepository.save(new Product(0, 1, 1, "description", "imageUrl", "Test Product 2")).getId();
