@@ -8,6 +8,7 @@ import com.revature.dtos.PasswordChange;
 import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
+import com.revature.models.Question;
 import com.revature.models.User;
 import com.revature.services.AuthService;
 import com.revature.services.UserService;
@@ -36,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest, @RequestBody Question question) {
         User created = new User(0,
                 registerRequest.getEmail(),
                 registerRequest.getPassword(),
@@ -45,8 +46,9 @@ public class AuthController {
                 registerRequest.getImageUrl(),
                 AuthRestriction.USER
                 );
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
+        question.setId(0);
+        question.setUserid(0);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created, question));
     }
 
     @PatchMapping("/reset")
