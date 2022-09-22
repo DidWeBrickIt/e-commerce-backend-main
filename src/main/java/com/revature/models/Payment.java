@@ -21,8 +21,6 @@ public class Payment {
 
     private String credit_card_number;
 
-    private String security_code;
-
     private String expiration;
 
 }
