@@ -27,3 +27,8 @@ jobs:
           context: .
           push: true
           tags: didwebrickit/project3backend:latest
+
+      - name: Repo Visualizer
+        uses: githubocto/repo-visualizer@0.8.2
+        with:
+          output_file: "images/diagram.svg"
