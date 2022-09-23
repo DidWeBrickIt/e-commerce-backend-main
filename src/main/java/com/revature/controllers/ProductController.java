@@ -30,12 +30,6 @@ public class ProductController {
         return ResponseEntity.ok(productService.save(product));
     }
 
-    @Authorized(authorities = {AuthRestriction.ADMIN })
-    @PutMapping
-    public ResponseEntity<Product> updateProduct(@RequestHeader("auth") String jwt, @RequestBody Product product) {
-        return ResponseEntity.ok(productService.save(product));
-    }
-
     @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping
     public ResponseEntity<List<Product>> getInventory(@RequestHeader("auth") String jwt) {
