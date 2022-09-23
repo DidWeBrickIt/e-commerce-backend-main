@@ -56,7 +56,7 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(QuestionNotFoundException.class)
-    public ResponseEntity<Object> handleQuestionNotFoundException(HttpServletRequest request, UserNotFoundException userNotFoundException)
+    public ResponseEntity<Object> handleQuestionNotFoundException(HttpServletRequest request, QuestionNotFoundException questionNotFoundException)
     {
         String errorMessage = "Question not found";
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);

@@ -8,7 +8,6 @@ import com.revature.models.Review;
 import com.revature.models.User;
 import com.revature.services.QuestionService;
 import com.revature.services.UserService;
-import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
