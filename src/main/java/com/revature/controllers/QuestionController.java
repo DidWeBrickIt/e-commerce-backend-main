@@ -45,7 +45,6 @@ public class QuestionController {
                 throw new UserNotFoundException();
             }
         } catch (NullPointerException e){
-            e.printStackTrace();
             throw new UserNotFoundException();
         }
     }
