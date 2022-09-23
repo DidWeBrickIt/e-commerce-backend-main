@@ -1,8 +1,7 @@
-package com.revature;
+package com.revature.services;
 
 import com.revature.annotations.AuthRestriction;
 import com.revature.dtos.Jwt;
-import com.revature.services.JwtService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

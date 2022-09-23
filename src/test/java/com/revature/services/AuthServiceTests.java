@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.services;
 
 import com.revature.annotations.AuthRestriction;
 import com.revature.dtos.LoginRequest;
@@ -6,7 +6,6 @@ import com.revature.exceptions.PasswordMismatchException;
 import com.revature.exceptions.UserExistsException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.User;
-import com.revature.services.AuthService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
