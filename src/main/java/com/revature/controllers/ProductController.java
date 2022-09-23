@@ -24,6 +24,12 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @Authorized(authorities = {AuthRestriction.ADMIN})
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@RequestHeader("auth") String jwt, @RequestBody Product product){
+        return ResponseEntity.ok(productService.save(product));
+    }
+
     @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping
     public ResponseEntity<List<Product>> getInventory(@RequestHeader("auth") String jwt) {
@@ -39,12 +45,6 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(optional.get());
-    }
-
-    @Authorized(authorities = {AuthRestriction.ADMIN })
-    @PutMapping
-    public ResponseEntity<Product> upsert(@RequestHeader("auth") String jwt, @RequestBody Product product) {
-        return ResponseEntity.ok(productService.save(product));
     }
 
     @Authorized(authorities = {AuthRestriction.USER , AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
