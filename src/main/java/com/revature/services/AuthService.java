@@ -69,11 +69,6 @@ public class AuthService {
            // user already exists
            throw new UserExistsException();
        }
-
-//        int uId= template.execute(status ->  {
-//            User newUser = userService.save(user);
-//            return newUser.getId();
-//        });
        User newUser = userService.save(user);
        question.setUserid(newUser.getId());
        questionService.save(question);
