@@ -8,14 +8,17 @@ import com.revature.dtos.PasswordChange;
 import com.revature.dtos.Jwt;
 import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
+import com.revature.models.Question;
 import com.revature.models.User;
 import com.revature.services.AuthService;
+import com.revature.services.QuestionService;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -30,6 +33,9 @@ public class AuthController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    QuestionService questionService;
+
     @PostMapping("/login")
     public Jwt login(@RequestBody LoginRequest loginRequest) {
         return authService.authenticateUser(loginRequest);
@@ -37,27 +43,31 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) {
-        User created = new User(0,
-                registerRequest.getEmail(),
-                registerRequest.getPassword(),
-                registerRequest.getFirstName(),
-                registerRequest.getLastName(),
-                registerRequest.getImageUrl(),
-                AuthRestriction.USER
-                );
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
+        User user = registerRequest.getUser();
+        Question question = registerRequest.getQuestion();
+        user.setAuthRestriction(AuthRestriction.USER);
+        user.setId(0);
+        question.setId(0);
+        question.setUserid(0);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(user, question));
     }
 
     @PatchMapping("/reset")
-    public ResponseEntity<User> changeCredential(@RequestBody PasswordChange passwordChange){
+    public ResponseEntity<User> changeCredential(@RequestBody Map<String, String> requestBody){
+        PasswordChange passwordChange = new PasswordChange(requestBody.get("username"), requestBody.get("password"));
+        String answer = requestBody.get("answer");
         Optional<User> retrieved = userService.findByUsername(passwordChange.getUsername());
-
         if(retrieved.isPresent()){
-            return ResponseEntity.status(HttpStatus.CREATED).body(authService.update(passwordChange));
-        }else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            Optional<Question> retrievedQuestion = questionService.findByUserid(retrieved.get().getId());
+            if(retrievedQuestion.isPresent()) {
+                if (retrievedQuestion.get().getAnswer().equals(answer)) {
+                    return ResponseEntity.status(HttpStatus.CREATED).body(authService.update(passwordChange));
+                }
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
         }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
     }
 
     @Authorized(authorities = {AuthRestriction.USER})
