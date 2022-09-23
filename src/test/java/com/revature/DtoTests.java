@@ -1,8 +1,9 @@
-package com.revature.modeldtos;
+package com.revature;
 
 import com.revature.dtos.*;
 import com.revature.models.Address;
 import com.revature.models.Payment;
+import com.revature.models.Question;
 import com.revature.models.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -104,19 +105,15 @@ public class DtoTests {
 
     @Test
     void register_request_dto_test(){
+        User u = new User();
+        Question q = new Question();
         RegisterRequest rr = new RegisterRequest();
-        RegisterRequest rr2 = new RegisterRequest("email", "pass", "first", "last", "img");
+        RegisterRequest rr2 = new RegisterRequest(u,q);
 
-        rr.setEmail("email");
-        rr.setPassword("pass");
-        rr.setFirstName("first");
-        rr.setLastName("last");
-        rr.setImageUrl("img");
+        rr.setUser(u);
+        rr.setQuestion(q);
 
-        Assertions.assertEquals("email", rr.getEmail());
-        Assertions.assertEquals("pass", rr.getPassword());
-        Assertions.assertEquals("first", rr.getFirstName());
-        Assertions.assertEquals("last", rr.getLastName());
-        Assertions.assertEquals("img", rr.getImageUrl());
+        Assertions.assertEquals(u, rr.getUser());
+        Assertions.assertEquals(q, rr.getQuestion());
      }
 }

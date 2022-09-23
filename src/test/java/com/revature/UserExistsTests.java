@@ -1,4 +1,4 @@
-package com.revature.except;
+package com.revature;
 
 import com.revature.exceptions.UserExistsException;
 import org.junit.jupiter.api.Assertions;

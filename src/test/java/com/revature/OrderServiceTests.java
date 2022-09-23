@@ -1,4 +1,4 @@
-package com.revature.services;
+package com.revature;
 
 import com.revature.annotations.AuthRestriction;
 import com.revature.models.Order;
@@ -7,6 +7,7 @@ import com.revature.models.User;
 import com.revature.repositories.OrderRepository;
 import com.revature.repositories.ProductRepository;
 import com.revature.repositories.UserRepository;
+import com.revature.services.OrderService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

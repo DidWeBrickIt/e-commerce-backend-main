@@ -1,5 +1,6 @@
-package com.revature.controllers;
+package com.revature;
 
+import com.revature.controllers.ProfileController;
 import com.revature.dtos.ProfileInfo;
 import com.revature.exceptions.NotAuthorizedException;
 import com.revature.exceptions.UserNotFoundException;

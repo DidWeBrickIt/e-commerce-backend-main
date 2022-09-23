@@ -1,4 +1,4 @@
-package com.revature.modeldtos;
+package com.revature;
 
 import com.revature.annotations.AuthRestriction;
 import com.revature.models.*;

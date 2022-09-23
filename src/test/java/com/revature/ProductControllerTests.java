@@ -1,9 +1,9 @@
-package com.revature.controllers;
+package com.revature;
 
+import com.revature.controllers.ProductController;
 import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.services.ProductService;
-import com.revature.services.ProfileService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -58,7 +58,7 @@ public class ProductControllerTests {
     void upsert_test(){
         Product p = new Product();
         when(productServiceMock.save(p)).thenReturn(p);
-        ResponseEntity<Product> re = productController.upsert("jwt", p);
+        ResponseEntity<Product> re = productController.createProduct("jwt", p);
         Assertions.assertEquals(HttpStatus.OK, re.getStatusCode());
     }
 

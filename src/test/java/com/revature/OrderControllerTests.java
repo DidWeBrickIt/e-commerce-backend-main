@@ -1,5 +1,6 @@
-package com.revature.controllers;
+package com.revature;
 
+import com.revature.controllers.OrderController;
 import com.revature.models.Order;
 import com.revature.services.OrderService;
 import org.junit.jupiter.api.Assertions;

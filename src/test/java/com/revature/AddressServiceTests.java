@@ -1,4 +1,4 @@
-package com.revature.services;
+package com.revature;
 
 import com.revature.models.Address;
 import com.revature.repositories.AddressRepository;

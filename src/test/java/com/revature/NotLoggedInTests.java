@@ -1,37 +1,36 @@
-package com.revature.except;
+package com.revature;
 
-
-import com.revature.exceptions.InvalidInputException;
+import com.revature.exceptions.NotLoggedInException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class InvalidInputTests {
+public class NotLoggedInTests {
 
     @Test
     void message_test(){
-        InvalidInputException e = new InvalidInputException();
-        InvalidInputException ex = new InvalidInputException("test");
-        Assertions.assertEquals("test", ex.getMessage());
+        NotLoggedInException e = new NotLoggedInException();
+        NotLoggedInException ex = new NotLoggedInException("message");
+        Assertions.assertEquals("message", ex.getMessage());
     }
     @Test
-    void throwable_test(){
+    void cause_test(){
         RuntimeException e = new RuntimeException("cause");
-        InvalidInputException ex = new InvalidInputException(e);
+        NotLoggedInException ex = new NotLoggedInException(e);
         Assertions.assertEquals(e, ex.getCause());
     }
     @Test
-    void throwable_and_message_test(){
+    void cause_and_message_test(){
         RuntimeException e = new RuntimeException("cause");
-        InvalidInputException ex = new InvalidInputException("message",e);
+        NotLoggedInException ex = new NotLoggedInException("message",e);
         Assertions.assertEquals("message", ex.getMessage());
         Assertions.assertEquals(e, ex.getCause());
     }
     @Test
     void all_params_test(){
         RuntimeException e = new RuntimeException("cause");
-        InvalidInputException ex = new InvalidInputException("message",e, true, true);
+        NotLoggedInException ex = new NotLoggedInException("message",e,true,true);
         Assertions.assertEquals("message", ex.getMessage());
         Assertions.assertEquals(e, ex.getCause());
     }

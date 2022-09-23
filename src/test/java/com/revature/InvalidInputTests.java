@@ -1,35 +1,37 @@
-package com.revature.except;
+package com.revature;
 
-import com.revature.exceptions.UserNotFoundException;
+
+import com.revature.exceptions.InvalidInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class UserNotFoundTests {
+public class InvalidInputTests {
 
     @Test
     void message_test(){
-        UserNotFoundException ex = new UserNotFoundException("message");
-        Assertions.assertEquals("message", ex.getMessage());
+        InvalidInputException e = new InvalidInputException();
+        InvalidInputException ex = new InvalidInputException("test");
+        Assertions.assertEquals("test", ex.getMessage());
     }
     @Test
-    void cause_test(){
+    void throwable_test(){
         RuntimeException e = new RuntimeException("cause");
-        UserNotFoundException ex = new UserNotFoundException(e);
+        InvalidInputException ex = new InvalidInputException(e);
         Assertions.assertEquals(e, ex.getCause());
     }
     @Test
-    void cause_and_message_test(){
+    void throwable_and_message_test(){
         RuntimeException e = new RuntimeException("cause");
-        UserNotFoundException ex = new UserNotFoundException("message",e);
+        InvalidInputException ex = new InvalidInputException("message",e);
         Assertions.assertEquals("message", ex.getMessage());
         Assertions.assertEquals(e, ex.getCause());
     }
     @Test
     void all_params_test(){
         RuntimeException e = new RuntimeException("cause");
-        UserNotFoundException ex = new UserNotFoundException("message",e,true,true);
+        InvalidInputException ex = new InvalidInputException("message",e, true, true);
         Assertions.assertEquals("message", ex.getMessage());
         Assertions.assertEquals(e, ex.getCause());
     }

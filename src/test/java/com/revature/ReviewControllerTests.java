@@ -1,5 +1,6 @@
-package com.revature.controllers;
+package com.revature;
 
+import com.revature.controllers.ReviewController;
 import com.revature.dtos.ReadableReview;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Review;
