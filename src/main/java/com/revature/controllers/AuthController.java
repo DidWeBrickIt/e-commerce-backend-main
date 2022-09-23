@@ -47,6 +47,7 @@ public class AuthController {
         Question question = registerRequest.getQuestion();
         user.setAuthRestriction(AuthRestriction.USER);
         user.setId(0);
+        user.setImageurl("../../../assets/images/profile_pic/the_infomaniac-head.png");
         question.setId(0);
         question.setUserid(0);
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(user, question));
