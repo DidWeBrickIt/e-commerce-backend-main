@@ -6,10 +6,14 @@ import com.revature.dtos.LoginRequest;
 import com.revature.exceptions.PasswordMismatchException;
 import com.revature.exceptions.UserExistsException;
 import com.revature.exceptions.UserNotFoundException;
+import com.revature.models.Question;
 import com.revature.models.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.Optional;
 
@@ -19,6 +23,12 @@ public class AuthService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    QuestionService questionService;
+
+    @Autowired
+    private TransactionTemplate template;
 
     @Autowired
     JwtService jwtService;
@@ -51,14 +61,18 @@ public class AuthService {
     }
 
 
-    public User register(User user)
+    @Transactional
+    public User register(User user, Question question)
     {
        if (this.userService.findByUsername(user.getEmail()).isPresent())
        {
            // user already exists
            throw new UserExistsException();
        }
-        return userService.save(user);
+       User newUser = userService.save(user);
+       question.setUserid(newUser.getId());
+       questionService.save(question);
+       return newUser;
     }
 
     public User update(PasswordChange passwordChange){
