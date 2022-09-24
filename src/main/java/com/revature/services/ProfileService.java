@@ -50,22 +50,6 @@ public class ProfileService {
             this.addressService.save(newAddress);
         }
 
-        Optional<Payment> originalPayment = this.paymentService.findByUserid(id);
-        if(originalPayment.isPresent()){
-            System.out.println("Inside Profile Service Update Payment");
-            Payment updatedPayment = profileInfo.getPayment();
-            updatedPayment.setId(originalPayment.get().getId());
-            updatedPayment.setUserid(id);
-            this.paymentService.save(updatedPayment);
-        }else{
-            System.out.println("Inside Profile Service Create Payment");
-            Payment newPayment = profileInfo.getPayment();
-            newPayment.setUserid(id);
-            System.out.println(profileInfo.getPayment());
-            System.out.println(newPayment);
-            this.paymentService.save(newPayment);
-        }
-
         return profileInfo;
     }
 
