@@ -54,25 +54,6 @@ public class ModelsTests {
 
     }
 
-    @Test
-    void payment_model_test(){
-        Payment pay = new Payment();
-        Payment pay2 = new Payment(2,2,"2222222222222222", "12/22");
-
-        pay.setId(1);
-        pay.setUserid(1);
-        pay.setCredit_card_number("1234123412341234");
-        pay.setExpiration("12/22");
-
-        Assertions.assertEquals(1, pay.getId());
-        Assertions.assertEquals(1, pay.getUserid());
-        Assertions.assertEquals("1234123412341234", pay.getCredit_card_number());
-        Assertions.assertEquals("12/22", pay.getExpiration());
-
-        Assertions.assertEquals("Payment(id=1, userid=1, credit_card_number=1234123412341234, expiration=12/22)", pay.toString());
-        Assertions.assertTrue(pay.equals(pay));
-        Assertions.assertEquals(1510498579, pay.hashCode());
-    }
 
     @Test
     void product_model_test(){
