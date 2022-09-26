@@ -19,7 +19,6 @@ class ProductRepoTests {
     ProductRepository productRepository;
 
     @Test
-    @Disabled // doesn't mess with product id
     void create_product(){
         Product toy = new Product(0, 5, 10.42, "A new toy", "Image of cool toy", "Super Toy");
         this.productRepository.save(toy);
@@ -41,11 +40,11 @@ class ProductRepoTests {
     }
 
     @Test
-    @Disabled // doesn't mess with product id
     void delete_product(){
-        Product toy = new Product(500, 5, 10.42, "A new toy", "Image of cool toy", "Super Toy");
+        Product toy = new Product(0, 5, 10.42, "A new toy", "Image of cool toy", "Super Toy");
         this.productRepository.save(toy);
-        this.productRepository.deleteById(toy.getId());
-        Assertions.assertThrows(RuntimeException.class, () -> this.productRepository.getById(toy.getId()));
+        int toyId = toy.getId();
+        this.productRepository.deleteById(toyId);
+        Assertions.assertThrows(RuntimeException.class, () -> this.productRepository.getById(toyId));
     }
 }

@@ -60,8 +60,9 @@ class AuthServiceTests {
     void throw_user_already_exist_test()
     {
         Question question = new Question(0, 0, "Name of my dog?", "candy");
-        authService.register(new User(0, "test@test", "test", "test", "test","", AuthRestriction.USER), question);
-        Assertions.assertThrows(UserExistsException.class, () ->authService.register(new User(0, "test@test", "test", "duplicate", "user","", AuthRestriction.USER), question));
+        User testUser = new User(0, "test@test", "test", "test", "test","", AuthRestriction.USER);
+        authService.register(testUser, question);
+        Assertions.assertThrows(UserExistsException.class, () ->authService.register(testUser, question));
     }
 
 

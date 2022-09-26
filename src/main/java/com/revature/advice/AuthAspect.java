@@ -42,7 +42,7 @@ public class AuthAspect {
             log.info("role from JWT: " + role + ". Valid roles: " + requiredAuths);
             AuthRestriction auth = AuthRestriction.valueOf(role);
 
-            if (!Arrays.stream(requiredAuths.authorities()).anyMatch(m -> auth == m))
+            if (Arrays.stream(requiredAuths.authorities()).noneMatch(m -> auth == m))
             {
                 // user does NOT have a valid auth
                 throw new NotAuthorizedException("User is not authorized for endpoint: " + request.getRequestURL());
