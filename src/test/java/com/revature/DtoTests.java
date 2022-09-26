@@ -2,7 +2,6 @@ package com.revature;
 
 import com.revature.dtos.*;
 import com.revature.models.Address;
-import com.revature.models.Payment;
 import com.revature.models.Question;
 import com.revature.models.User;
 import org.junit.jupiter.api.Assertions;
@@ -71,20 +70,17 @@ class DtoTests {
     @Test
     void profile_info_dto_test(){
         User u = new User();
-        Payment pay = new Payment();
         Address addy = new Address();
 
         ProfileInfo pi = new ProfileInfo();
 
         pi.setUser(u);
-        pi.setPayment(pay);
         pi.setAddress(addy);
 
         Assertions.assertTrue(u.equals(pi.getUser()));
-        Assertions.assertTrue(pay.equals(pi.getPayment()));
         Assertions.assertTrue(addy.equals(pi.getAddress()));
 
-        ProfileInfo pi2 = new ProfileInfo(u,pay,addy);
+        ProfileInfo pi2 = new ProfileInfo(u,addy);
     }
 
     @Test
