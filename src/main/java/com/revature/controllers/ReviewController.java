@@ -4,13 +4,11 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.revature.annotations.AuthRestriction;
 import com.revature.annotations.Authorized;
-import com.revature.dtos.Jwt;
 import com.revature.dtos.ReadableReview;
+import com.revature.dtos.ReviewInfo;
 import com.revature.exceptions.UserNotFoundException;
-import com.revature.models.Product;
 import com.revature.models.Review;
 import com.revature.models.User;
-import com.revature.services.JwtService;
 import com.revature.services.ReviewService;
 import com.revature.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +43,7 @@ public class ReviewController
 
     @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @PostMapping("/register")
-    public ResponseEntity<Review> registerReview(@RequestHeader("auth") String jwt, @RequestBody Review review)
+    public ResponseEntity<Review> registerReview(@RequestHeader("auth") String jwt, @RequestBody ReviewInfo reviewInfo)
     {
         // Expecting review in body to contain everything we need except userId.
 
@@ -65,9 +63,10 @@ public class ReviewController
         }
         int userId = possibleUser.get().getId();
         log.info("retrieved userId: " + userId);
+        Review review = new Review(0,reviewInfo.getUserId(),reviewInfo.getProdId(),reviewInfo.getTimestamp(),reviewInfo.getDescription(),reviewInfo.getRating());
         review.setUserId(userId);
+        log.info(("Review about to be saved" + reviewInfo));
 
-        log.info(("Review about to be saved" + review));
         return new ResponseEntity<Review>(reviewService.registerReview(review), HttpStatus.CREATED);
 
     }

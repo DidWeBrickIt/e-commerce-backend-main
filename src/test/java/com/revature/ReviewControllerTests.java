@@ -2,6 +2,7 @@ package com.revature;
 
 import com.revature.controllers.ReviewController;
 import com.revature.dtos.ReadableReview;
+import com.revature.dtos.ReviewInfo;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Review;
 import com.revature.models.User;
@@ -35,7 +36,7 @@ class ReviewControllerTests {
 
     @Test
     void get_reviews_by_product_test(){
-        //theres nothing to test
+        //there's nothing to test
         ReadableReview rr = new ReadableReview("user", 1, "desc", 1);
         List<ReadableReview> reviews = new ArrayList<>();
         reviews.add(rr);
@@ -47,7 +48,7 @@ class ReviewControllerTests {
     @Test
     void register_review_works_test(){
         String jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiYXV0aG9yaXR5IjoiVVNFUiJ9.FgtdhAOtZ__UXTd0rLuHGL2j4gV8mOjr-kDe-r7RSVc";
-        Review r = new Review(1,1,1,1,"desc", 1);
+        ReviewInfo r = new ReviewInfo(1,1,1,"desc", 1);
         User u = new User();
         when(userServiceMock.findByUsername("John Doe")).thenReturn(Optional.of(u));
 
@@ -57,12 +58,9 @@ class ReviewControllerTests {
     @Test
     void review_user_not_found_test(){
         String jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiYXV0aG9yaXR5IjoiVVNFUiJ9.FgtdhAOtZ__UXTd0rLuHGL2j4gV8mOjr-kDe-r7RSVc";
-        Review r = new Review(1,1,1,1,"desc", 1);
-        User u = new User();
+        ReviewInfo r = new ReviewInfo(1,1,1,"desc", 1);
         when(userServiceMock.findByUsername("John Doe")).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(UserNotFoundException.class, () -> {
-            ResponseEntity<Review> re = reviewController.registerReview(jwt, r);
-        });
+        Assertions.assertThrows(UserNotFoundException.class, () -> reviewController.registerReview(jwt, r));
     }
 }
