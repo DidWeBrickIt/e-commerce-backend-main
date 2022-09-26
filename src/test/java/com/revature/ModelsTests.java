@@ -49,7 +49,6 @@ class ModelsTests {
         Assertions.assertEquals(1, order.getTimePurchased());
 
         Assertions.assertEquals("Order{id=1, userId=1, prodId=1, quantity=1, timePurchased=1}", order.toString());
-        Assertions.assertEquals(order, order);
         Assertions.assertEquals(727250580, order.hashCode());
 
     }
@@ -70,7 +69,6 @@ class ModelsTests {
         Assertions.assertEquals("12/22", pay.getExpiration());
 
         Assertions.assertEquals("Payment(id=1, userid=1, credit_card_number=1234123412341234, expiration=12/22)", pay.toString());
-        Assertions.assertEquals(pay, pay);
         Assertions.assertEquals(1510498579, pay.hashCode());
     }
 
@@ -93,7 +91,6 @@ class ModelsTests {
         Assertions.assertEquals("name", prod.getName());
 
         Assertions.assertEquals("Product(id=1, quantity=1, price=1.0, description=desc, image=image, name=name)", prod.toString());
-        Assertions.assertEquals(prod, prod);
         Assertions.assertEquals(2034870322, prod.hashCode());
     }
 
@@ -116,7 +113,6 @@ class ModelsTests {
         Assertions.assertEquals(1, rev.getRating());
 
         Assertions.assertEquals("Review(id=1, userId=1, prodId=1, timestamp=1, description=desc, rating=1)", rev.toString());
-        Assertions.assertEquals(rev, rev);
         Assertions.assertEquals(-38808915, rev.hashCode());
 
     }
@@ -142,7 +138,6 @@ class ModelsTests {
         Assertions.assertEquals(AuthRestriction.USER, u.getAuthRestriction());
 
         Assertions.assertEquals("User(id=1, email=email, password=pass, firstName=first, lastName=last, imageurl=image, authRestriction=USER)", u.toString());
-        Assertions.assertEquals(u, u);
         Assertions.assertNotEquals(0, u.hashCode());
 
     }
