@@ -34,8 +34,10 @@ class ProductRepoTests {
 
     @Test
     void get_product_by_id(){
-        Product headphones = this.productRepository.getById(1);
-        Assertions.assertEquals("Headphones", headphones.getName());
+        Product toy = new Product(0, 5, 10.42, "A new toy", "Image of cool toy", "Super Toy");
+        this.productRepository.save(toy);
+        Product savedToy = this.productRepository.getById(toy.getId());
+        Assertions.assertEquals("Super Toy", savedToy.getName());
     }
 
     @Test
