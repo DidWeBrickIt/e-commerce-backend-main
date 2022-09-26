@@ -42,7 +42,7 @@ public class ProfileController {
             Optional<User> foundUser = userService.findByUsername(username);
 
             if(foundUser.isPresent()){
-
+                profileInfo.getUser().setPassword(foundUser.get().getPassword());
                 ProfileInfo updated = this.profileService.save(foundUser.get().getId(), profileInfo);
                 return ResponseEntity.status(HttpStatus.CREATED).body(updated);
 
