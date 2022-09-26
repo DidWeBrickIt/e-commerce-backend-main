@@ -2,7 +2,6 @@ package com.revature.services;
 
 import com.revature.dtos.ProfileInfo;
 import com.revature.models.Address;
-import com.revature.models.Payment;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +15,6 @@ public class ProfileService {
     AddressService addressService;
     @Autowired
     UserService  userService;
-    @Autowired
-    PaymentService paymentService;
 
     public ProfileInfo save(int id, ProfileInfo profileInfo){
 
@@ -57,7 +54,6 @@ public class ProfileService {
 
         Optional<User> user = userService.findById(id);
         Optional<Address> address = addressService.findByUserid(id);
-        Optional<Payment> payment = paymentService.findByUserid(id);
 
         ProfileInfo retrieved = new ProfileInfo();
 
@@ -66,9 +62,6 @@ public class ProfileService {
         }
         if(address.isPresent()){
             retrieved.setAddress(address.get());
-        }
-        if(payment.isPresent()){
-            retrieved.setPayment(payment.get());
         }
             return retrieved;
     }

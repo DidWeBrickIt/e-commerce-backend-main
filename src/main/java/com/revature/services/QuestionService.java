@@ -1,6 +1,5 @@
 package com.revature.services;
 
-import com.revature.models.Payment;
 import com.revature.models.Question;
 import com.revature.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
