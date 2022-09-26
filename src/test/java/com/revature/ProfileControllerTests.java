@@ -41,6 +41,7 @@ public class ProfileControllerTests {
         ProfileInfo pi = new ProfileInfo();
         User u = new User();
         u.setId(1);
+        pi.setUser(u);
         when(jwtServiceMock.validateJWT(jwt)).thenReturn(true);
         when(userServiceMock.findByUsername("John Doe")).thenReturn(Optional.of(u));
         when(profileServiceMock.save(1, pi)).thenReturn(pi);
