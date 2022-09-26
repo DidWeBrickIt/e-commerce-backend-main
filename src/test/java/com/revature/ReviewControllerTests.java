@@ -22,7 +22,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class ReviewControllerTests {
+class ReviewControllerTests {
 
     @InjectMocks
     ReviewController reviewController;

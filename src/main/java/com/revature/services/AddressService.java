@@ -1,6 +1,5 @@
 package com.revature.services;
 
-import com.revature.dtos.ProfileInfo;
 import com.revature.models.Address;
 import com.revature.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;

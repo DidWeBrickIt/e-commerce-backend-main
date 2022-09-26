@@ -30,11 +30,10 @@ public class ProfileController {
     JwtService jwtService;
 
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn, AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @PatchMapping
     public ResponseEntity<ProfileInfo> update(@RequestHeader("auth") String jwt, @RequestBody ProfileInfo profileInfo){
-
-        System.out.println("Inside Profile Controller");
+        
         if(jwtService.validateJWT(jwt)){
 
             DecodedJWT decodedJWT = JWT.decode(jwt);
@@ -51,7 +50,7 @@ public class ProfileController {
     }
 
 
-    @Authorized(authorities = {AuthRestriction.LoggedIn, AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
+    @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.EMPLOYEE, AuthRestriction.ADMIN})
     @GetMapping
     public ResponseEntity<ProfileInfo> retrieve(@RequestHeader("auth") String jwt) {
 

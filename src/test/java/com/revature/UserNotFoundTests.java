@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class UserNotFoundTests {
+class UserNotFoundTests {
 
     @Test
     void message_test(){

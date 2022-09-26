@@ -19,7 +19,7 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
-public class OrderServiceTests {
+class OrderServiceTests {
 
     @Autowired
     UserRepository userRepository;

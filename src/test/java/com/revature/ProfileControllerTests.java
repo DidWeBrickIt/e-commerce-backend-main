@@ -22,7 +22,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ProfileControllerTests {
+class ProfileControllerTests {
 
     @InjectMocks
     ProfileController profileController;

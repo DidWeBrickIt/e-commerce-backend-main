@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-public class AddressServiceTests {
+class AddressServiceTests {
 
     @Autowired
     AddressRepository addressRepository;
