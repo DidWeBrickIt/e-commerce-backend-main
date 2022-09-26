@@ -16,13 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-public class AuthServiceTests {
+class AuthServiceTests {
 
     @Autowired
     AuthService authService;
 
     @Test
-    public void authenticate_user_user_does_not_exist_test() {
+    void authenticate_user_user_does_not_exist_test() {
         User user = new User(0, "test@test", "test", "test", "testson","", AuthRestriction.USER);
         Question question = new Question(0, 0, "Name of my dog?", "candy");
         this.authService.register(user, question);
@@ -31,7 +31,7 @@ public class AuthServiceTests {
     }
 
     @Test
-    public void authenticate_user_password_mismatch_test() {
+    void authenticate_user_password_mismatch_test() {
         User user = new User(0, "test@test", "test", "test", "testson","", AuthRestriction.USER);
         Question question = new Question(0, 0, "Name of my dog?", "candy");
         this.authService.register(user, question);
@@ -40,7 +40,7 @@ public class AuthServiceTests {
     }
 
     @Test
-    public void authenticate_user_test() {
+    void authenticate_user_test() {
         User user = new User(0, "test@test", "test", "test", "testson","", AuthRestriction.USER);
         Question question = new Question(0, 0, "Name of my dog?", "candy");
         this.authService.register(user, question);

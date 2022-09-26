@@ -18,7 +18,7 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
-public class ReviewServiceTests
+class ReviewServiceTests
 {
     @Autowired
     ReviewService reviewService;

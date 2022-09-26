@@ -9,19 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class JwtServiceTests {
+class JwtServiceTests {
 
     @Autowired
     JwtService jwtService;
 
     @Test
-    public void create_jwt_test() {
+    void create_jwt_test() {
         Jwt jwt = this.jwtService.createJWT("test@test", AuthRestriction.USER);
-        Assertions.assertTrue(this.jwtService.validateJWT(jwt.getJwt()));
+        Assertions.assertTrue(this.jwtService.validateJWT(jwt.getJwtData()));
     }
 
     @Test
-    public void validate_invalid_jwt_test() {
+    void validate_invalid_jwt_test() {
         Assertions.assertFalse(this.jwtService.validateJWT("aaadlanfsdnvoisdn"));
     }
 

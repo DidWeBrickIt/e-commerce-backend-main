@@ -17,7 +17,7 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
-public class ReviewRepoTests {
+class ReviewRepoTests {
     @Autowired
     ReviewRepository reviewRepository;
 

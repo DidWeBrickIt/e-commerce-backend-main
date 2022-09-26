@@ -13,20 +13,20 @@ import java.util.Optional;
 
 @SpringBootTest
 @Transactional
-public class UserRepositoryTests {
+class UserRepositoryTests {
 
     @Autowired
     UserRepository userRepository;
 
     @Test
-    public void save_user_test() {
+    void save_user_test() {
         User user = new User(0, "test@test", "test", "Jim", "Henson","", AuthRestriction.USER);
         User savedUser = this.userRepository.save(user);
         Assertions.assertNotEquals(0, savedUser.getId());
     }
 
     @Test
-    public void find_user_by_credentials_test() {
+    void find_user_by_credentials_test() {
         User user = new User(0, "test@test", "test", "Jim", "Henson","", AuthRestriction.USER);
         this.userRepository.save(user);
         Optional<User> foundUser = this.userRepository.findByEmailAndPassword("test@test", "test");
@@ -34,13 +34,13 @@ public class UserRepositoryTests {
     }
 
     @Test
-    public void find_nonexistent_credentials_test() {
+    void find_nonexistent_credentials_test() {
         Optional<User> foundUser = this.userRepository.findByEmailAndPassword("sdasdasds", "asdsdasd");
         Assertions.assertFalse(foundUser.isPresent());
     }
 
     @Test
-    public void find_user_by_email_test() {
+    void find_user_by_email_test() {
         User user = new User(0, "test@test", "test", "Jim", "Henson","", AuthRestriction.USER);
         this.userRepository.save(user);
         Optional<User> foundUser = this.userRepository.findByEmail("test@test");
@@ -48,7 +48,7 @@ public class UserRepositoryTests {
     }
 
     @Test
-    public void find_nonexistent_email_test() {
+    void find_nonexistent_email_test() {
         Optional<User> foundUser = this.userRepository.findByEmail("sdasdasdsasdsdasd");
         Assertions.assertFalse(foundUser.isPresent());
     }

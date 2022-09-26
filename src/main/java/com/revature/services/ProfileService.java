@@ -17,10 +17,6 @@ public class ProfileService {
     UserService  userService;
 
     public ProfileInfo save(int id, ProfileInfo profileInfo){
-
-        System.out.println("Inside Profile Service");
-        System.out.println(profileInfo);
-
         Optional<User> originalUser = this.userService.findById(id);
         if(originalUser.isPresent()){
             System.out.println("Inside Profile Service Update User");

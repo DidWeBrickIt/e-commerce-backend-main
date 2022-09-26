@@ -9,16 +9,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class DtoTests {
+class DtoTests {
 
     @Test
     void jwt_dto_test(){
         Jwt jwt = new Jwt("jwt", "access");
 
-        jwt.setJwt("jwt2");
+        jwt.setJwtData("jwt2");
         jwt.setUserAccess("access2");
 
-        Assertions.assertEquals("jwt2", jwt.getJwt());
+        Assertions.assertEquals("jwt2", jwt.getJwtData());
         Assertions.assertEquals("access2", jwt.getUserAccess());
 
         Assertions.assertEquals("Jwt{jwt='jwt2', userAccess='access2'}", jwt.toString());

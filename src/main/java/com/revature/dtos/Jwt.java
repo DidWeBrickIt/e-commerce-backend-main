@@ -2,22 +2,22 @@ package com.revature.dtos;
 
 public class Jwt
 {
-    private String jwt;
+    private String jwtData;
 
     private String userAccess;
 
 
-    public Jwt(String jwt, String userAccess) {
-        this.jwt = jwt;
+    public Jwt(String jwtData, String userAccess) {
+        this.jwtData = jwtData;
         this.userAccess = userAccess;
     }
 
-    public String getJwt() {
-        return jwt;
+    public String getJwtData() {
+        return jwtData;
     }
 
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
+    public void setJwtData(String jwtData) {
+        this.jwtData = jwtData;
     }
 
     public String getUserAccess() {
@@ -31,7 +31,7 @@ public class Jwt
     @Override
     public String toString() {
         return "Jwt{" +
-                "jwt='" + jwt + '\'' +
+                "jwt='" + jwtData + '\'' +
                 ", userAccess='" + userAccess + '\'' +
                 '}';
     }

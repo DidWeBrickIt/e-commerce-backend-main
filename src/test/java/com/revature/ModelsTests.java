@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ModelsTests {
+class ModelsTests {
 
     @Test
     void address_model_test(){
@@ -49,11 +49,8 @@ public class ModelsTests {
         Assertions.assertEquals(1, order.getTimePurchased());
 
         Assertions.assertEquals("Order{id=1, userId=1, prodId=1, quantity=1, timePurchased=1}", order.toString());
-        Assertions.assertTrue(order.equals(order));
         Assertions.assertEquals(727250580, order.hashCode());
-
     }
-
 
     @Test
     void product_model_test(){
@@ -74,7 +71,6 @@ public class ModelsTests {
         Assertions.assertEquals("name", prod.getName());
 
         Assertions.assertEquals("Product(id=1, quantity=1, price=1.0, description=desc, image=image, name=name)", prod.toString());
-        Assertions.assertTrue(prod.equals(prod));
         Assertions.assertEquals(2034870322, prod.hashCode());
     }
 
@@ -97,7 +93,6 @@ public class ModelsTests {
         Assertions.assertEquals(1, rev.getRating());
 
         Assertions.assertEquals("Review(id=1, userId=1, prodId=1, timestamp=1, description=desc, rating=1)", rev.toString());
-        Assertions.assertTrue(rev.equals(rev));
         Assertions.assertEquals(-38808915, rev.hashCode());
 
     }
@@ -123,7 +118,6 @@ public class ModelsTests {
         Assertions.assertEquals(AuthRestriction.USER, u.getAuthRestriction());
 
         Assertions.assertEquals("User(id=1, email=email, password=pass, firstName=first, lastName=last, imageurl=image, authRestriction=USER)", u.toString());
-        Assertions.assertTrue(u.equals(u));
         Assertions.assertNotEquals(0, u.hashCode());
 
     }
