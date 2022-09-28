@@ -71,7 +71,7 @@ public class AuthController {
 
     }
 
-    @Authorized(authorities = {AuthRestriction.USER})
+    @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.ADMIN})
     @GetMapping
     public ResponseEntity<Integer> getUserIdByJwt(@RequestHeader("auth") String jwt){
         DecodedJWT decodedJWT = JWT.decode(jwt);
