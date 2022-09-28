@@ -22,14 +22,14 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @Authorized(authorities = {AuthRestriction.USER})
+    @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.ADMIN})
     @PostMapping
     public ResponseEntity<List<Order>> order(@RequestBody List<Order> orderList){
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.addOrders(orderList));
     }
 
 
-    @Authorized(authorities = {AuthRestriction.USER})
+    @Authorized(authorities = {AuthRestriction.USER, AuthRestriction.ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<List<Order>> getOrdersByUserId(@RequestHeader("auth") String jwt, @PathVariable("id") int id){
         return ResponseEntity.ok(orderService.findAllOrderByUserId(id));
